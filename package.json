@@ -1,0 +1,22 @@
+{
+  "name": "change-log",
+  "version": "1.0.0",
+  "description": "Change log command line utility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Jackson <majgis@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.2",
+    "async-args": "^1.4.4",
+    "minimist": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "bin": {
+    "change-log":"bin/change-log.js"
+  }
+}
