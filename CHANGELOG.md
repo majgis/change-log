@@ -8,8 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 ### Minor
 ### Patch
+- Prefix versions with v
 
-## [1.1.0] - 2016-11-12
+## [v1.1.0] - 2016-11-12
 ### Minor
 - Better display of errors
 - Arguments for major, minor, and patch are now accepted to add message 
@@ -19,13 +20,14 @@ to the Unreleased section
 - Add repository information to package.json
 - Unreleased is now capitalized 
 
-## [1.0.0] - 2016-11-12
+## [v1.0.0] - 2016-11-12
 ### Major
 - Generate a new CHANGELOG.md file
 
 [Unreleased]: https://github.com/majgis/change-log/compare/v1.1.0...master
-[1.1.0]: https://github.com/majgis/change-log/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/majgis/change-log/commits/v1.0.0
+[v1.1.0]: https://github.com/majgis/change-log/compare/v1.0.0...v1.1.0
+[v1.0.0]: https://github.com/majgis/change-log/commits/v1.0.0
+
 
 
 
