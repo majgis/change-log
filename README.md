@@ -52,7 +52,9 @@ Marks the unreleased section as a release:
  and on unreleased Major, Minor and Patch entries.
 - Adds a new empty unreleased section.
 
-    change-log release
-    
+```
+change-log release
+```
+  
 [0]: http://semver.org/
 [1]: https://github.com/majgis/change-log/blob/master/CHANGELOG.md

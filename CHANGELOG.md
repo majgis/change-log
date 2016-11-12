@@ -9,6 +9,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Minor
 ### Patch
 
+## [v1.2.1] - 2016-11-12
+### Patch
+- Correct formatting in readme
+
 ## [v1.2.0] - 2016-11-12
 ### Minor
 - The release argument was added
@@ -29,10 +33,13 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v1.2.0...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v1.2.1...master
+[v1.2.1]: https://github.com/majgis/change-log/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/majgis/change-log/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/majgis/change-log/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/majgis/change-log/commits/v1.0.0
+
+
 
 
 
