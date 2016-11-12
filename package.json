@@ -1,7 +1,7 @@
 {
   "name": "change-log",
   "version": "1.0.0",
-  "description": "Change log command line utility",
+  "description": "Command line generation of Semantic Versioning based change log",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,19 @@
     "node": ">=4"
   },
   "bin": {
-    "change-log":"bin/change-log.js"
-  }
+    "change-log": "bin/change-log.js"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majgis/change-log.git"
+  },
+  "keywords": [
+    "change",
+    "log"
+  ],
+  "bugs": {
+    "url": "https://github.com/majgis/change-log/issues"
+  },
+  "homepage": "https://github.com/majgis/change-log#readme"
 }
