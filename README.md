@@ -21,7 +21,9 @@ View a list of command arguments and options
 
 ## Initialize
 
-Create a new CHANGELOG.md file. A package.json file must be present.
+Create a new CHANGELOG.md file.
+The name is taken from package.json if it exists, and from the folder
+name if it does not.
 
     change-log init
     
@@ -42,6 +44,15 @@ Add an entry under Minor in the Unreleased section.
 Add an entry under Patch in the Unreleased section.
 
     change-log patch "What was fixed"
+    
+## Release
+
+Marks the unreleased section as a release:
+- Calculates the SemVer based on the previous release in the change log 
+ and on unreleased Major, Minor and Patch entries.
+- Adds a new empty unreleased section.
+
+    change-log release
     
 [0]: http://semver.org/
 [1]: https://github.com/majgis/change-log/blob/master/CHANGELOG.md

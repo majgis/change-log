@@ -1,3 +1,4 @@
+'use strict';
 const init = require('./lib/init');
 const waterfall = require('async/waterfall');
 const apply = require('async/apply');
@@ -5,11 +6,21 @@ const fs = require('fs');
 const AsyncArgs = require('async-args');
 const appConstants = require('./lib/appConstants');
 const insertSemVerMsg = require('./lib/insertSemVerMsg');
+const release = require('./lib/release');
+const path = require('path');
 
 function loadPkg(next) {
   fs.readFile('package.json', (err, data)=> {
-    if (err) return next(err);
-    next(null, JSON.parse(data))
+    let pkg;
+    if (err) {
+      pkg = {
+        name: path.basename(process.cwd())
+      }
+    } else {
+      pkg = JSON.parse(data)
+    }
+
+    next(null, pkg)
   })
 }
 
@@ -42,6 +53,15 @@ function executeTask(args, options, pkg, next) {
       AsyncArgs.prependConstants(appConstants.fileName),
       writeLinesToFile
     ], next);
+  }
+
+  if (task === 'release'){
+    return waterfall([
+      apply(loadFileLinesToArray, appConstants.fileName),
+      release,
+      AsyncArgs.prependConstants(appConstants.fileName),
+      writeLinesToFile
+    ], next)
   }
 }
 

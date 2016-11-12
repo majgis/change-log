@@ -19,6 +19,10 @@ const instructions = `
   change-log patch "What was changed"
      - Adds a new entry under Patch in the Unreleased section
      
+  change-log release
+     - Marks the current unreleased section as a release
+     - Adds an empty unreleased section
+     
 `;
 
 if (args.length === 0){
