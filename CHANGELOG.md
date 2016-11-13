@@ -12,11 +12,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Patch
 
-## [v1.3.2] - 2016-11-13
-
-### Patch
-- Fixed spacing issue when some entries are missing
-
 ## [v1.3.1] - 2016-11-13
 
 ### Patch
