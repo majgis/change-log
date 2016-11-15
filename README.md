@@ -3,11 +3,12 @@
 Command line generation of a [Semantic Versioning][0]
 based change log.
 
-This project is still in the early stages of development, so it is 
-still rough around the edges, with more features to come.  For example,
-the tool intelligence is currently low, so be careful removing 
-sections created by `change-log init`, especially under the Unreleased 
-section.
+Please note: the tool intelligence is currently low.  Be careful not to 
+remove sections created by `change-log init`, especially under the 
+Unreleased section.
+
+This project was inpired by [Keep a Change Log][2] but the format is 
+different, with a focus on the SemVer versions.
 
 ## API
 
@@ -53,6 +54,74 @@ Marks the unreleased section as a release:
 ```
 change-log release
 ```
+
+
+
+## Options
+
+Default settings can be overridden using a `.changelog` file in the 
+current working directory or in your home directory.  You can also 
+specify the same options at command line.
+
+Here are the options that can be provided to override the defaults:
+
+### unreleasedUriTemplate
+    * A string template for a git uri of changes not yet published
+    * Used during release
+
+### startUriTemplate
+    * A string template for a git uri of changes from the first commit
+    * Used during init and release
+
+### uriTemplate
+    * A string template for a git uri of changes between releases.
+    * Used during release
+
+### organization
+    * The group name associated with a git repository
+    * Used during init and release
+
+### name
+    * The project name associated with a git repository
+    * The default comes from the repository field of package.json, the 
+    name in package.json or the containing directory.
+    * Used during init and release
+
+Here are the recognized tokens that will be replaced in each string 
+template above:
+
+* ${organization}
+    * This is the git repository group name
+    * Taken from the repository field of package.json by default
+* ${name}
+    * The git repository project name
+    * Taken from repository field of package.json, name in package.json 
+    or directory
+* ${fromVersion}
+    * In the case of startUriTemplate, this value will be an empty string
+    * The version prior to release
+* ${toVersion}
+    * The current release version
+
+These tokens are replaced with a simple find and replace operation, 
+with no evaluation of what is between the braces.
+
+Example `.changelog` file:
+```
+{
+  "unreleasedUriTemplate": "https://github.com/${organization}/${name}/compare/v${toVersion}...master",
+  "startUriTemplate": "https://github.com/${organization}/${name}/commits/v${toVersion}",
+  "uriTemplate": "https://github.com/${organization}/${name}/compare/v${fromVersion}...v${toVersion}",
+  
+  "organization": "myOrg",
+  "name": "projectName"
+}
+```
+
+Example cli options:
+
+    change-log release --unreleasedUriTemplate="https://github.com/${organization}/${name}/compare/v${toVersion}...master"
+
 
 ## Example
 
@@ -159,3 +228,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   
 [0]: http://semver.org/
 [1]: https://github.com/majgis/change-log/blob/master/CHANGELOG.md
+[2]: http://keepachangelog.com

@@ -11,7 +11,8 @@
   "dependencies": {
     "async": "^2.1.2",
     "async-args": "^1.4.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "rcfile": "^1.0.3"
   },
   "engines": {
     "node": ">=4.2.0"

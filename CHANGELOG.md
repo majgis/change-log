@@ -11,6 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Minor
 
 ### Patch
+
+## [v1.5.0] - 2016-11-15
+
+### Minor
+- Support options from .changelog file or cli to override defaults
+
+### Patch
 - Fix issue with adding copious newlines at the bottom
 - Update the readme with an example
 
@@ -59,7 +66,8 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v1.4.0...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v1.5.0...master
+[v1.5.0]: https://github.com/majgis/change-log/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/majgis/change-log/compare/v1.3.1...v1.4.0
 [v1.3.1]: https://github.com/majgis/change-log/compare/v1.3.0...v1.3.1
 [v1.3.0]: https://github.com/majgis/change-log/compare/v1.2.1...v1.3.0

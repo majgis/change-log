@@ -2,6 +2,7 @@
 const init = require('./lib/init');
 const waterfall = require('async/waterfall');
 const apply = require('async/apply');
+const asyncify = require('async/asyncify');
 const fs = require('fs');
 const AsyncArgs = require('async-args');
 const appConstants = require('./lib/appConstants');
@@ -10,11 +11,11 @@ const release = require('./lib/release');
 const path = require('path');
 const defaultOrg = '${organization}';
 const whitespacePaddingRE = /^\s+|\s+$/g;
+const rcfile = require('rcfile')('change-log', {configFileName: '.changelog'});
 
 function parsePkgRepo(repo) {
   let result = {};
   if (repo && repo.url && repo.url.indexOf('github.com') > 0) {
-    //"git+https://github.com/majgis/change-log.git
     let split = repo.url.split('/');
     result.organization = split[3];
     result.name = split[4].split('.')[0];
@@ -55,31 +56,31 @@ function writeLinesToFile(filePath, lines, next) {
   fs.writeFile(filePath, data, next);
 }
 
-function executeTask(args, options, pkg, next) {
+function executeTask(args, options, next) {
   const task = args[0];
   const value = args[1];
 
   if (task === 'init') {
-    return init(options, pkg, next)
+    return init(options, next)
   }
 
-  const semVerName = appConstants.semVerMatch[task];
+  const semVerName = options.semVerMatch[task];
   if (semVerName) {
     return waterfall([
-      apply(loadFileLinesToArray, appConstants.fileName),
-      AsyncArgs.appendConstants(semVerName, value),
+      apply(loadFileLinesToArray, options.fileName),
+      AsyncArgs.appendConstants(semVerName, value, options),
       insertSemVerMsg,
-      AsyncArgs.prependConstants(appConstants.fileName),
+      AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile
     ], next);
   }
 
   if (task === 'release') {
     return waterfall([
-      apply(loadFileLinesToArray, appConstants.fileName),
-      AsyncArgs.prependConstants(pkg),
+      apply(loadFileLinesToArray, options.fileName),
+      AsyncArgs.appendConstants(options),
       release,
-      AsyncArgs.prependConstants(appConstants.fileName),
+      AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile
     ], next);
   }
@@ -87,11 +88,38 @@ function executeTask(args, options, pkg, next) {
   next(new Error('The command was not recognized.'));
 }
 
-function changeLog(args, options, next) {
+function uriTemplateFactory(template) {
+  return (fromVersion, toVersion, organization, name)=> {
+    return template
+      .replace(/\$\{fromVersion}/g, fromVersion)
+      .replace(/\$\{toVersion}/g, toVersion)
+      .replace(/\$\{organization}/g, organization)
+      .replace(/\$\{name}/g, name)
+  }
+}
+
+function updateOptions(options) {
+  if (options.unreleasedUriTemplate) {
+    options.unreleasedUriTemplate =
+      uriTemplateFactory(options.unreleasedUriTemplate);
+  }
+  if (options.startUriTemplate) {
+    options.startUriTemplate = uriTemplateFactory(options.startUriTemplate);
+  }
+  if (options.uriTemplate) {
+    options.uriTemplate = uriTemplateFactory(options.uriTemplate)
+  }
+
+  return Object.assign({}, appConstants, options)
+}
+
+function changeLog(args, cliOptions, next) {
+  let options = updateOptions(Object.assign(rcfile, cliOptions));
   waterfall([
     loadPkg,
-    AsyncArgs.prependConstants(args, options),
-    executeTask
+    AsyncArgs.appendConstants(options),
+    asyncify(Object.assign),
+    apply(executeTask, args)
   ], next);
 }
 
