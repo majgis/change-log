@@ -66,42 +66,42 @@ specify the same options at command line.
 Here are the options that can be provided to override the defaults:
 
 ### unreleasedUriTemplate
-    * A string template for a git uri of changes not yet published
-    * Used during release
+- A string template for a git uri of changes not yet published
+- Used during release
 
 ### startUriTemplate
-    * A string template for a git uri of changes from the first commit
-    * Used during init and release
+- A string template for a git uri of changes from the first commit
+- Used during init and release
 
 ### uriTemplate
-    * A string template for a git uri of changes between releases.
-    * Used during release
+- A string template for a git uri of changes between releases.
+- Used during release
 
 ### organization
-    * The group name associated with a git repository
-    * Used during init and release
+- The group name associated with a git repository
+- Used during init and release
 
 ### name
-    * The project name associated with a git repository
-    * The default comes from the repository field of package.json, the 
+- The project name associated with a git repository
+- The default comes from the repository field of package.json, the 
     name in package.json or the containing directory.
-    * Used during init and release
+- Used during init and release
 
 Here are the recognized tokens that will be replaced in each string 
 template above:
 
-* ${organization}
-    * This is the git repository group name
-    * Taken from the repository field of package.json by default
-* ${name}
-    * The git repository project name
-    * Taken from repository field of package.json, name in package.json 
+- ${organization}
+    - This is the git repository group name
+    - Taken from the repository field of package.json by default
+- ${name}
+    - The git repository project name
+    - Taken from repository field of package.json, name in package.json 
     or directory
-* ${fromVersion}
-    * In the case of startUriTemplate, this value will be an empty string
-    * The version prior to release
-* ${toVersion}
-    * The current release version
+- ${fromVersion}
+    - In the case of startUriTemplate, this value will be an empty string
+    - The version prior to release
+- ${toVersion}
+    - The current release version
 
 These tokens are replaced with a simple find and replace operation, 
 with no evaluation of what is between the braces.
