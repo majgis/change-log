@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Correctly manage URIs for github
 
 ### Patch
+- Report an error if the command is not recognized
 
 ## [v1.3.1] - 2016-11-13
 
@@ -57,6 +58,7 @@ to the Unreleased section
 [v1.2.0]: https://github.com/majgis/change-log/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/majgis/change-log/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/majgis/change-log/commits/v1.0.0
+
 
 
 

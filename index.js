@@ -80,8 +80,10 @@ function executeTask(args, options, pkg, next) {
       release,
       AsyncArgs.prependConstants(appConstants.fileName),
       writeLinesToFile
-    ], next)
+    ], next);
   }
+
+  next(new Error('The command was not recognized.'));
 }
 
 function changeLog(args, options, next) {
