@@ -9,6 +9,7 @@ const insertSemVerMsg = require('./lib/insertSemVerMsg');
 const release = require('./lib/release');
 const path = require('path');
 const defaultOrg = '${organization}';
+const whitespacePaddingRE = /^\s+|\s+$/g;
 
 function parsePkgRepo(repo) {
   let result = {};
@@ -44,7 +45,7 @@ function loadPkg(next) {
 
 function loadFileLinesToArray(filePath, next) {
   fs.readFile(filePath, 'utf8', (err, data)=> {
-    if (data) data = data.split('\n');
+    if (data) data = data.replace(whitespacePaddingRE, '').split('\n');
     next(err, data);
   })
 }
