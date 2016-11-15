@@ -8,18 +8,36 @@ const appConstants = require('./lib/appConstants');
 const insertSemVerMsg = require('./lib/insertSemVerMsg');
 const release = require('./lib/release');
 const path = require('path');
+const defaultOrg = '${organization}';
+
+function parsePkgRepo(repo) {
+  let result = {};
+  if (repo && repo.url && repo.url.indexOf('github.com') > 0) {
+    //"git+https://github.com/majgis/change-log.git
+    let split = repo.url.split('/');
+    result.organization = split[3];
+    result.name = split[4].split('.')[0];
+  }
+  return result
+}
 
 function loadPkg(next) {
+  const dirName = path.basename(process.cwd());
+
   fs.readFile('package.json', (err, data)=> {
     let pkg;
     if (err) {
       pkg = {
-        name: path.basename(process.cwd())
+        name: dirName
       }
     } else {
-      pkg = JSON.parse(data)
+      let packageJson = JSON.parse(data);
+      let repo = parsePkgRepo(packageJson.repository);
+      pkg = {
+        name: repo.name || packageJson.name || dirName,
+        organization: repo.organization || defaultOrg
+      }
     }
-
     next(null, pkg)
   })
 }
@@ -55,9 +73,10 @@ function executeTask(args, options, pkg, next) {
     ], next);
   }
 
-  if (task === 'release'){
+  if (task === 'release') {
     return waterfall([
       apply(loadFileLinesToArray, appConstants.fileName),
+      AsyncArgs.prependConstants(pkg),
       release,
       AsyncArgs.prependConstants(appConstants.fileName),
       writeLinesToFile
