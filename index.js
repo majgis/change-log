@@ -79,7 +79,7 @@ function executeTask (args, options, next) {
     return waterfall([
       apply(loadFileLinesToArray, options.fileName),
       AsyncArgs.appendConstants(options),
-      release,
+      asyncify(release),
       AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile
     ], next);
