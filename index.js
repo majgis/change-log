@@ -9,59 +9,59 @@ const appConstants = require('./lib/appConstants');
 const insertSemVerMsg = require('./lib/insertSemVerMsg');
 const release = require('./lib/release');
 const path = require('path');
-const defaultOrg = '${organization}';
+const defaultOrg = '$' + '{organization}';
 const whitespacePaddingRE = /^\s+|\s+$/g;
 const rcfile = require('rcfile')('change-log', {configFileName: '.changelog'});
 
-function parsePkgRepo(repo) {
+function parsePkgRepo (repo) {
   let result = {};
   if (repo && repo.url && repo.url.indexOf('github.com') > 0) {
     let split = repo.url.split('/');
     result.organization = split[3];
     result.name = split[4].split('.')[0];
   }
-  return result
+  return result;
 }
 
-function loadPkg(next) {
+function loadPkg (next) {
   const dirName = path.basename(process.cwd());
 
-  fs.readFile('package.json', (err, data)=> {
+  fs.readFile('package.json', (err, data) => {
     let pkg;
     if (err) {
       pkg = {
         name: dirName
-      }
+      };
     } else {
       let packageJson = JSON.parse(data);
       let repo = parsePkgRepo(packageJson.repository);
       pkg = {
         name: repo.name || packageJson.name || dirName,
         organization: repo.organization || defaultOrg
-      }
+      };
     }
-    next(null, pkg)
-  })
+    next(null, pkg);
+  });
 }
 
-function loadFileLinesToArray(filePath, next) {
-  fs.readFile(filePath, 'utf8', (err, data)=> {
+function loadFileLinesToArray (filePath, next) {
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if (data) data = data.replace(whitespacePaddingRE, '').split('\n');
     next(err, data);
-  })
+  });
 }
 
-function writeLinesToFile(filePath, lines, next) {
+function writeLinesToFile (filePath, lines, next) {
   const data = lines.join('\n') + '\n';
   fs.writeFile(filePath, data, next);
 }
 
-function executeTask(args, options, next) {
+function executeTask (args, options, next) {
   const task = args[0];
   const value = args[1];
 
   if (task === 'init') {
-    return init(options, next)
+    return init(options, next);
   }
 
   const semVerName = options.semVerMatch[task];
@@ -88,17 +88,17 @@ function executeTask(args, options, next) {
   next(new Error('The command was not recognized.'));
 }
 
-function uriTemplateFactory(template) {
-  return (fromVersion, toVersion, organization, name)=> {
+function uriTemplateFactory (template) {
+  return (fromVersion, toVersion, organization, name) => {
     return template
       .replace(/\$\{fromVersion}/g, fromVersion)
       .replace(/\$\{toVersion}/g, toVersion)
       .replace(/\$\{organization}/g, organization)
-      .replace(/\$\{name}/g, name)
-  }
+      .replace(/\$\{name}/g, name);
+  };
 }
 
-function updateOptions(options) {
+function updateOptions (options) {
   if (options.unreleasedUriTemplate) {
     options.unreleasedUriTemplate =
       uriTemplateFactory(options.unreleasedUriTemplate);
@@ -107,13 +107,13 @@ function updateOptions(options) {
     options.startUriTemplate = uriTemplateFactory(options.startUriTemplate);
   }
   if (options.uriTemplate) {
-    options.uriTemplate = uriTemplateFactory(options.uriTemplate)
+    options.uriTemplate = uriTemplateFactory(options.uriTemplate);
   }
 
-  return Object.assign({}, appConstants, options)
+  return Object.assign({}, appConstants, options);
 }
 
-function changeLog(args, cliOptions, next) {
+function changeLog (args, cliOptions, next) {
   let options = updateOptions(Object.assign(rcfile, cliOptions));
   waterfall([
     loadPkg,

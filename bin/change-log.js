@@ -25,13 +25,14 @@ const instructions = `
      
 `;
 
-if (args.length === 0){
-  return console.log(instructions);
+if (args.length === 0) {
+  console.log(instructions);
+  process.exit();
 }
 
 changeLog(args, options, (err) => {
   if (err) {
-    if (err.message){
+    if (err.message) {
       console.log('ERROR: ' + err.message);
       return process.exit(1);
     }

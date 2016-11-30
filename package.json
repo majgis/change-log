@@ -4,7 +4,9 @@
   "description": "Command line generation of a Semantic Versioning based change log",
   "main": "index.js",
   "scripts": {
-    "test": "tape '{lib/**/*.test.js,*.test.js}'"
+    "test": "tape '{lib/**/*.test.js,*.test.js}'",
+    "style": "semistandard",
+    "style-fix": "semistandard --fix"
   },
   "author": "Michael Jackson <majgis@gmail.com>",
   "license": "ISC",
@@ -21,6 +23,7 @@
     "change-log": "bin/change-log.js"
   },
   "devDependencies": {
+    "semistandard": "^9.1.0",
     "tape": "^4.6.3"
   },
   "repository": {
