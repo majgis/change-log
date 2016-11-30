@@ -4,7 +4,7 @@
   "description": "Command line generation of a Semantic Versioning based change log",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape '{lib/**/*.test.js,*.test.js}'"
   },
   "author": "Michael Jackson <majgis@gmail.com>",
   "license": "ISC",
@@ -20,7 +20,9 @@
   "bin": {
     "change-log": "bin/change-log.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "^4.6.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/majgis/change-log.git"

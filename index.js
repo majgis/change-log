@@ -69,7 +69,7 @@ function executeTask(args, options, next) {
     return waterfall([
       apply(loadFileLinesToArray, options.fileName),
       AsyncArgs.appendConstants(semVerName, value, options),
-      insertSemVerMsg,
+      asyncify(insertSemVerMsg),
       AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile
     ], next);
