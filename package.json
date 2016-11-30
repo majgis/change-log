@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tape '{lib/**/*.test.js,*.test.js}'",
     "style": "semistandard",
-    "style-fix": "semistandard --fix"
+    "style-fix": "semistandard --fix",
+    "prepublish": "npm run style && npm test"
   },
   "author": "Michael Jackson <majgis@gmail.com>",
   "license": "ISC",
