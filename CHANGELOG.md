@@ -11,16 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Minor
 
 ### Patch
-
-## [v2.0.0] - 2016-11-30
-
-### Major
-- test
-
-### Minor
-- test
-
-### Patch
 - Add tests
 
 ## [v1.5.1] - 2016-11-15
