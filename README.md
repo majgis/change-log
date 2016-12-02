@@ -7,7 +7,9 @@ Please note: the tool intelligence is currently low.  Be careful not to
 remove sections created by `change-log init`, especially under the 
 Unreleased section.
 
-This project was inpired by [Keep a Change Log][2] but the format is 
+You can see an editable example of this format [here][3].
+
+This project was inspired by [Keep a Change Log][2] but the format is 
 different, with a focus on the SemVer versions.
 
 ## API
@@ -229,3 +231,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [0]: http://semver.org/
 [1]: https://github.com/majgis/change-log/blob/master/CHANGELOG.md
 [2]: http://keepachangelog.com
+[3]: http://majgis.com/change-log
+
