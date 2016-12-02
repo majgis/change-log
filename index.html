@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>change-log</title>
+  <style>
+    html, body, #editor {
+      margin: 0;
+      height: 100%;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #333;
+    }
+
+    textarea, #editor div {
+      display: inline-block;
+      width: 49%;
+      height: 100%;
+      vertical-align: top;
+      box-sizing: border-box;
+      padding: 0 20px;
+      resize: none !important;
+    }
+
+    textarea {
+      border: none;
+      border-right: 1px solid #ccc;
+      outline: none;
+      background-color: #f6f6f6;
+      font-size: 16px;
+      font-family: monospace;
+      padding: 20px;
+    }
+
+    code {
+      color: #f66;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor">
+
+    <textarea :value="input" @input="update"></textarea>
+    <div v-html="compiledMarkdown"></div>
+
+    <script type="text/javascript" src="//unpkg.com/marked@0.3.6"></script>
+    <script type="text/javascript" src="//unpkg.com/lodash@4.16.0"></script>
+    <script type="text/javascript" src="//unpkg.com/vue@2.1.4/dist/vue.js"></script>
+
+    <script>
+      new Vue({
+        el: '#editor',
+        data: {
+          input: '# change-log Change Log\n\nAll notable changes to this project will be documented in this file.\n\nThis project adheres to [Semantic Versioning](http://semver.org/).\n\n## [Unreleased] - YYYY-MM-DD\n\n### Major\n\n### Minor\n\n### Patch\n- Add tests\n\n## [v1.5.1] - 2016-11-15\n\n### Patch\n- Fix readme formatting\n\n## [v1.5.0] - 2016-11-15\n\n### Minor\n- Support options from .changelog file or cli to override defaults\n\n### Patch\n- Fix issue with adding copious newlines at the bottom\n- Update the readme with an example\n\n## [v1.4.0] - 2016-11-15\n\n### Minor\n- Correctly manage URIs for github\n\n### Patch\n- Report an error if the command is not recognized\n\n## [v1.3.1] - 2016-11-13\n\n### Patch\n- Add newlines to changelog to address rendering issue\n\n## [v1.3.0] - 2016-11-13\n### Minor\n- Add version to uri section at bottom\n\n## [v1.2.1] - 2016-11-12\n### Patch\n- Correct formatting in readme\n\n## [v1.2.0] - 2016-11-12\n\n### Minor\n- The release argument was added\n\n### Patch\n- Prefix versions with v\n- The package.json is no longer required\n\n## [v1.1.0] - 2016-11-12\n\n### Minor\n- Better display of errors\n- Arguments for major, minor, and patch are now accepted to add message \nto the Unreleased section\n\n### Patch\n- Add repository information to package.json\n- Unreleased is now capitalized \n\n## [v1.0.0] - 2016-11-12\n### Major\n- Generate a new CHANGELOG.md file\n\n[Unreleased]: https://github.com/majgis/change-log/compare/v1.5.1...master\n[v1.5.1]: https://github.com/majgis/change-log/compare/v1.5.0...v1.5.1\n[v1.5.0]: https://github.com/majgis/change-log/compare/v1.4.0...v1.5.0\n[v1.4.0]: https://github.com/majgis/change-log/compare/v1.3.1...v1.4.0\n[v1.3.1]: https://github.com/majgis/change-log/compare/v1.3.0...v1.3.1\n[v1.3.0]: https://github.com/majgis/change-log/compare/v1.2.1...v1.3.0\n[v1.2.1]: https://github.com/majgis/change-log/compare/v1.2.0...v1.2.1\n[v1.2.0]: https://github.com/majgis/change-log/compare/v1.1.0...v1.2.0\n[v1.1.0]: https://github.com/majgis/change-log/compare/v1.0.0...v1.1.0\n[v1.0.0]: https://github.com/majgis/change-log/commits/v1.0.0\n'
+        },
+        computed: {
+          compiledMarkdown: function () {
+            return marked(this.input, { sanitize: true })
+          }
+        },
+        methods: {
+          update: _.debounce(function (e) {
+            this.input = e.target.value
+          }, 300)
+        }
+      })
+    </script>
+  </div>
+</body>
+</html>
