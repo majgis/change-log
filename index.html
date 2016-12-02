@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>change-log</title>
+  <link rel="stylesheet" type="text/css" href="//unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
   <style>
     html, body, #editor {
       margin: 0;
       height: 100%;
       font-family: 'Helvetica Neue', Arial, sans-serif;
       color: #333;
+      min-width: 858px;
     }
 
     textarea, #editor div {
       display: inline-block;
       width: 49%;
-      height: 100%;
       vertical-align: top;
       box-sizing: border-box;
       padding: 0 20px;
-      resize: none !important;
+      resize: none;
+      height: 2570px;
+
     }
 
     textarea {
@@ -46,11 +49,13 @@
       background-color: whitesmoke;
       margin-left: 10px;
       padding: 1px 10px 1px 10px;
+      font-size: 16px;
     }
 
     h2 {
       margin-right: 110px;
     }
+
   </style>
 </head>
 <body>
@@ -80,6 +85,7 @@
         },
         methods: {
           update: _.debounce(function (e) {
+            console.log(e);
             this.input = e.target.value
           }, 300)
         }
