@@ -1,6 +1,6 @@
 {
   "name": "change-log",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Command line generation of a Semantic Versioning based change log",
   "main": "index.js",
   "scripts": {
