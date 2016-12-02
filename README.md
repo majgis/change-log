@@ -14,13 +14,11 @@ different, with a focus on the SemVer versions.
 
 ## API
 
-### Help
-
-View a list of command arguments and options
+Exeucte without arguments to view a list of command arguments and options
 
     change-log
 
-### Initialize
+### init
 
 Create a new CHANGELOG.md file.
 The name is taken from package.json if it exists, and from the folder
@@ -28,25 +26,25 @@ name if it does not.
 
     change-log init
     
-### Major
+### major
 
 Add an entry under Major in the Unreleased section.
 
     change-log major "What was changed"
 
-### Minor
+### minor
 
 Add an entry under Minor in the Unreleased section.
 
     change-log minor "What was added"
 
-### Patch
+### patch
 
 Add an entry under Patch in the Unreleased section.
 
     change-log patch "What was fixed"
     
-### Release
+### release
 
 Marks the unreleased section as a release:
 - Calculates the SemVer based on the previous release in the change log 
@@ -56,8 +54,6 @@ Marks the unreleased section as a release:
 ```
 change-log release
 ```
-
-
 
 ## Options
 
