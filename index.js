@@ -86,7 +86,7 @@ function executeTask (args, options, next) {
       AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile,
       asyncArgs.values('release'),
-      asyncArgs.select('/version'),
+      asyncArgs.select('/fullVersion'),
       asyncify(console.log)
     ], next);
   }
