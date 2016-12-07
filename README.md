@@ -229,5 +229,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [0]: http://semver.org/
 [1]: https://github.com/majgis/change-log/blob/master/CHANGELOG.md
 [2]: http://keepachangelog.com
-[3]: http://majgis.com/change-log
+[3]: https://majgis.github.io/change-log/
 
