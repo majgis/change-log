@@ -59,6 +59,7 @@ function writeLinesToFile (filePath, lines, next) {
 function executeTask (args, options, next) {
   const task = args[0];
   const value = args[1];
+  const asyncArgs = AsyncArgs();
 
   if (task === 'init') {
     return init(options, next);
@@ -80,8 +81,13 @@ function executeTask (args, options, next) {
       apply(loadFileLinesToArray, options.fileName),
       AsyncArgs.appendConstants(options),
       asyncify(release),
+      asyncArgs.store('release'),
+      asyncArgs.select('/lines'),
       AsyncArgs.prependConstants(options.fileName),
-      writeLinesToFile
+      writeLinesToFile,
+      asyncArgs.values('release'),
+      asyncArgs.select('/version'),
+      asyncify(console.log)
     ], next);
   }
 
