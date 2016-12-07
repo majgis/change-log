@@ -22,7 +22,7 @@ const instructions = `
   change-log release
      - Marks the current unreleased section as a release
      - Adds an empty unreleased section
-     
+     - Writes release version to the console
 `;
 
 if (args.length === 0) {

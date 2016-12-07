@@ -14,7 +14,7 @@ different, with a focus on the SemVer versions.
 
 ## API
 
-Exeucte without arguments to view a list of command arguments and options
+Execute without arguments to view a list of command arguments and options
 
     change-log
 
@@ -50,6 +50,7 @@ Marks the unreleased section as a release:
 - Calculates the SemVer based on the previous release in the change log 
  and on unreleased Major, Minor and Patch entries.
 - Adds a new empty unreleased section.
+- Writes release version to the console
 
 ```
 change-log release
@@ -195,6 +196,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Cut a release:
 ```
 $ change-log release && cat CHANGELOG.md 
+v1.0.0
 # change-log Change Log
 
 All notable changes to this project will be documented in this file.
