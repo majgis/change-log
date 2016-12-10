@@ -152,7 +152,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Add a minor entry:
 ```
-$ change-log minor "Addded a new feature" && cat CHANGELOG.md 
+$ change-log minor "Added a new feature" && cat CHANGELOG.md 
 # change-log Change Log
 
 All notable changes to this project will be documented in this file.
@@ -164,7 +164,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
-- Addded a new feature
+- Added a new feature
 
 ### Patch
 
@@ -185,7 +185,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
-- Addded a new feature
+- Added a new feature
 
 ### Patch
 - Fixed an issue
@@ -214,7 +214,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v1.0.0] - 2016-11-15
 
 ### Minor
-- Addded a new feature
+- Added a new feature
 
 ### Patch
 - Fixed an issue
