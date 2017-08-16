@@ -12,6 +12,7 @@ const path = require('path');
 const defaultOrg = '$' + '{organization}';
 const whitespacePaddingRE = /^\s+|\s+$/g;
 const rcfile = require('rcfile')('change-log', {configFileName: '.changelog'});
+const parallel = require('async/parallel');
 
 function parsePkgRepo (repo) {
   let result = {};
@@ -55,6 +56,42 @@ function writeLinesToFile (filePath, lines, next) {
   const data = lines.join('\n') + '\n';
   fs.writeFile(filePath, data, next);
 }
+ function safeReadFile (name, next) {
+   fs.readFile (name, (error, value)=>{
+     try {
+      if (value) value=JSON.parse (value);
+    }catch (e){
+      //Intentionally ignoring error
+    }
+
+     next (null, value);
+   })
+ }
+
+ function writeVersion (fullVersion) {
+     fullVersion = fullVersion.replace('v','');
+     parallel({
+         package: apply(safeReadFile, 'package.json'),
+         shrinkwrap: apply(safeReadFile, 'npm-shrinkwrap.json'),
+         lock: apply(safeReadFile, 'package-lock.json')
+     }, (error, response) => {
+
+         if (response.shrinkwrap){
+             response.shrinkwrap.version=fullVersion
+             fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2))
+         }
+
+         if (response.package){
+             response.package.version=fullVersion
+             fs.writeFile('package.json', JSON.stringify(response.package, null, 2))
+         }
+
+         if (response.lock){
+           response.lock.version=fullVersion
+           fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2))
+         }
+     });
+}
 
 function executeTask (args, options, next) {
   const task = args[0];
@@ -87,7 +124,10 @@ function executeTask (args, options, next) {
       writeLinesToFile,
       asyncArgs.values('release'),
       asyncArgs.select('/fullVersion'),
-      asyncify(console.log)
+      asyncify(console.log),
+      asyncArgs.values('release'),
+      asyncArgs.select('/fullVersion'),
+      writeVersion
     ], next);
   }
 
