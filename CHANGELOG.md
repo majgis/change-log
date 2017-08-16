@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   and package-lock.json if they exist
 
 ### Patch
+- Add /.idea to the .npmignore
 - Fix an issue in the readme
 
 ## [v1.6.1] - 2016-12-07
