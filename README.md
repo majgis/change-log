@@ -51,6 +51,7 @@ Marks the unreleased section as a release:
  and on unreleased Major, Minor and Patch entries.
 - Adds a new empty unreleased section.
 - Writes release version to the console
+- Update package.json, npm-shrinkwrap.json and package-lock.json if they exist
 
 ```
 change-log release
