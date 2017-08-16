@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
+- On release, write version to package.json, npm-shrinkwrap.json
+  and package-lock.json if they exist
 
 ### Patch
 - Fix an issue in the readme
