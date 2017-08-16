@@ -9,6 +9,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
+
+### Patch
+
+## [v1.7.0] - 2017-08-16
+
+### Minor
 - On release, write version to package.json, npm-shrinkwrap.json
   and package-lock.json if they exist
 
@@ -103,7 +109,8 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v1.6.1...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v1.7.0...master
+[v1.7.0]: https://github.com/majgis/change-log/compare/v1.6.1...v1.7.0
 [v1.6.1]: https://github.com/majgis/change-log/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/majgis/change-log/compare/v1.5.4...v1.6.0
 [v1.5.4]: https://github.com/majgis/change-log/compare/v1.5.3...v1.5.4
