@@ -56,41 +56,42 @@ function writeLinesToFile (filePath, lines, next) {
   const data = lines.join('\n') + '\n';
   fs.writeFile(filePath, data, next);
 }
- function safeReadFile (name, next) {
-   fs.readFile (name, (error, value)=>{
-     try {
-      if (value) value=JSON.parse (value);
-    }catch (e){
-      //Intentionally ignoring error
+function safeReadFile (name, next) {
+  fs.readFile(name, (error, value) => {
+    if (error) return next();
+    try {
+      if (value) value = JSON.parse(value);
+    } catch (e) {
+      value = null;
     }
 
-     next (null, value);
-   })
- }
+    next(null, value);
+  });
+}
 
- function writeVersion (fullVersion) {
-     fullVersion = fullVersion.replace('v','');
-     parallel({
-         package: apply(safeReadFile, 'package.json'),
-         shrinkwrap: apply(safeReadFile, 'npm-shrinkwrap.json'),
-         lock: apply(safeReadFile, 'package-lock.json')
-     }, (error, response) => {
+function writeVersion (fullVersion, next) {
+  fullVersion = fullVersion.replace('v', '');
+  parallel({
+    package: apply(safeReadFile, 'package.json'),
+    shrinkwrap: apply(safeReadFile, 'npm-shrinkwrap.json'),
+    lock: apply(safeReadFile, 'package-lock.json')
+  }, (error, response) => {
+    if (error && !response) return next();
+    if (response.shrinkwrap) {
+      response.shrinkwrap.version = fullVersion;
+      fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2));
+    }
 
-         if (response.shrinkwrap){
-             response.shrinkwrap.version=fullVersion
-             fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2))
-         }
+    if (response.package) {
+      response.package.version = fullVersion;
+      fs.writeFile('package.json', JSON.stringify(response.package, null, 2));
+    }
 
-         if (response.package){
-             response.package.version=fullVersion
-             fs.writeFile('package.json', JSON.stringify(response.package, null, 2))
-         }
-
-         if (response.lock){
-           response.lock.version=fullVersion
-           fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2))
-         }
-     });
+    if (response.lock) {
+      response.lock.version = fullVersion;
+      fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2));
+    }
+  });
 }
 
 function executeTask (args, options, next) {
