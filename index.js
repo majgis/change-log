@@ -69,7 +69,7 @@ function safeReadFile (name, next) {
   });
 }
 
-function doNothing(){
+function doNothing () {
   return null;
 }
 
