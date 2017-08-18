@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Minor
 
 ### Patch
+- Remove deprecation warning when used under Node.js >=8
 
 ## [v1.7.0] - 2017-08-16
 

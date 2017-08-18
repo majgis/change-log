@@ -69,6 +69,10 @@ function safeReadFile (name, next) {
   });
 }
 
+function doNothing(){
+  return null;
+}
+
 function writeVersion (fullVersion, next) {
   fullVersion = fullVersion.replace('v', '');
   parallel({
@@ -79,17 +83,17 @@ function writeVersion (fullVersion, next) {
     if (error && !response) return next();
     if (response.shrinkwrap) {
       response.shrinkwrap.version = fullVersion;
-      fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2));
+      fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2), doNothing);
     }
 
     if (response.package) {
       response.package.version = fullVersion;
-      fs.writeFile('package.json', JSON.stringify(response.package, null, 2));
+      fs.writeFile('package.json', JSON.stringify(response.package, null, 2), doNothing);
     }
 
     if (response.lock) {
       response.lock.version = fullVersion;
-      fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2));
+      fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2), doNothing);
     }
   });
 }
