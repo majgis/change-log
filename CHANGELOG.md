@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Minor
 
 ### Patch
+
+## [v1.7.1] - 2017-08-18
+
+### Patch
 - Remove deprecation warning when used under Node.js >=8
 
 ## [v1.7.0] - 2017-08-16
@@ -111,7 +115,8 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v1.7.0...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v1.7.1...master
+[v1.7.1]: https://github.com/majgis/change-log/compare/v1.7.0...v1.7.1
 [v1.7.0]: https://github.com/majgis/change-log/compare/v1.6.1...v1.7.0
 [v1.6.1]: https://github.com/majgis/change-log/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/majgis/change-log/compare/v1.5.4...v1.6.0
