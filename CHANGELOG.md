@@ -7,11 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - YYYY-MM-DD
 
 ### Major
-- Write message to stdout for major, minor and patch commands
 
 ### Minor
 
 ### Patch
+
+## [v2.0.0] - 2017-12-15
+
+### Major
+- Write message to stdout for major, minor and patch commands
 
 ## [v1.7.2] - 2017-09-08
 
@@ -121,7 +125,8 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v1.7.2...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v2.0.0...master
+[v2.0.0]: https://github.com/majgis/change-log/compare/v1.7.2...v2.0.0
 [v1.7.2]: https://github.com/majgis/change-log/compare/v1.7.1...v1.7.2
 [v1.7.1]: https://github.com/majgis/change-log/compare/v1.7.0...v1.7.1
 [v1.7.0]: https://github.com/majgis/change-log/compare/v1.6.1...v1.7.0
