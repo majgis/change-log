@@ -60,7 +60,10 @@ Marks the unreleased section as a release:
 change-log release
 ```
 
-## Include Commit Message in Change Log
+## Pass STDOUT to command
+
+For the major, minor, and patch commands, the message you provided is echoed 
+to STDOUT.
 
     # major
     git commit -am "$(change-log major 'message')" 
@@ -70,10 +73,33 @@ change-log release
 
     # patch
     git commit -am "$(change-log patch 'message')" 
-    
+
+For the release command, the version, of form `v#.#.#` is written to stdout.
+
     # release
     git commit -am "$(change-log release)" 
 
+## Git commit options
+
+The following options will cause git commands to be executed when using the 
+major, minor, patch and release commands.
+
+### --commit
+
+This option calls `git commit -m "message"`, committing only staged changes.
+The CHANGELOG.md file will be automatically staged before committing.
+For the release command, package.json will be automatically staged, and 
+also npm-shrinkwrap.json and package-lock.json if they exist (the version will 
+have been updated in these files if they exist).
+
+    change-log release 'message' --commit
+
+#### --commit-all
+
+This option calls `git commit -am "message"`, committing all changes, both
+staged and unstaged.
+
+    change-log release 'message' --commit-all
 
 ## Options
 

@@ -69,32 +69,33 @@ function safeReadFile (name, next) {
   });
 }
 
-function doNothing () {
-  return null;
-}
-
 function writeVersion (fullVersion, next) {
-  fullVersion = fullVersion.replace('v', '');
+  const version = fullVersion.replace('v', '');
   parallel({
     package: apply(safeReadFile, 'package.json'),
     shrinkwrap: apply(safeReadFile, 'npm-shrinkwrap.json'),
     lock: apply(safeReadFile, 'package-lock.json')
   }, (error, response) => {
-    if (error && !response) return next();
+    if (error && !response) return next(null, fullVersion);
+    const writeInstructions = {};
+
     if (response.shrinkwrap) {
-      response.shrinkwrap.version = fullVersion;
-      fs.writeFile('npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2), doNothing);
+      response.shrinkwrap.version = version;
+      writeInstructions.shrinkwrap = apply(fs.writeFile, 'npm-shrinkwrap.json', JSON.stringify(response.shrinkwrap, null, 2));
     }
 
     if (response.package) {
-      response.package.version = fullVersion;
-      fs.writeFile('package.json', JSON.stringify(response.package, null, 2), doNothing);
+      response.package.version = version;
+      writeInstructions.package = apply(fs.writeFile, 'package.json', JSON.stringify(response.package, null, 2));
     }
 
     if (response.lock) {
-      response.lock.version = fullVersion;
-      fs.writeFile('package-lock.json', JSON.stringify(response.lock, null, 2), doNothing);
+      response.lock.version = version;
+      writeInstructions.lock = apply(fs.writeFile, 'package-lock.json', JSON.stringify(response.lock, null, 2));
     }
+    parallel(writeInstructions, () => {
+      next(null, fullVersion);
+    });
   });
 }
 
@@ -127,9 +128,6 @@ function executeTask (args, options, next) {
       asyncArgs.select('/lines'),
       AsyncArgs.prependConstants(options.fileName),
       writeLinesToFile,
-      asyncArgs.values('release'),
-      asyncArgs.select('/fullVersion'),
-      asyncify(console.log),
       asyncArgs.values('release'),
       asyncArgs.select('/fullVersion'),
       writeVersion

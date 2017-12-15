@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
+- Add --commit and --commit-all options
 
 ### Patch
 
