@@ -29,18 +29,21 @@ name if it does not.
 ### major
 
 Add an entry under Major in the Unreleased section.
+- The message is echoed to stdout.
 
     change-log major "What was changed"
 
 ### minor
 
 Add an entry under Minor in the Unreleased section.
+- The message is echoed to stdout.
 
     change-log minor "What was added"
 
 ### patch
 
 Add an entry under Patch in the Unreleased section.
+- The message is echoed to stdout.
 
     change-log patch "What was fixed"
     
@@ -56,6 +59,21 @@ Marks the unreleased section as a release:
 ```
 change-log release
 ```
+
+## Include Commit Message in Change Log
+
+    # major
+    git commit -am "$(change-log major 'message')" 
+
+    # minor
+    git commit -am "$(change-log minor 'message')" 
+
+    # patch
+    git commit -am "$(change-log patch 'message')" 
+    
+    # release
+    git commit -am "$(change-log release)" 
+
 
 ## Options
 

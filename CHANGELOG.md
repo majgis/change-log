@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - YYYY-MM-DD
 
 ### Major
+- Write message to stdout for major, minor and patch commands
 
 ### Minor
 

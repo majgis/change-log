@@ -38,4 +38,8 @@ changeLog(args, options, (err) => {
     }
     throw err;
   }
+  const command = args[0];
+  if (command === 'major' || command === 'minor' || command === 'patch') {
+    console.log(args[1]);
+  }
 });
