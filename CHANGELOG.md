@@ -9,9 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Major
 
 ### Minor
-- Add --commit and --commit-all options
 
 ### Patch
+
+## [v2.1.0] - 2017-12-18
+
+### Minor
+- Add --commit and --commit-all options
 
 ## [v2.0.0] - 2017-12-15
 
@@ -126,7 +130,8 @@ to the Unreleased section
 ### Major
 - Generate a new CHANGELOG.md file
 
-[Unreleased]: https://github.com/majgis/change-log/compare/v2.0.0...master
+[Unreleased]: https://github.com/majgis/change-log/compare/v2.1.0...master
+[v2.1.0]: https://github.com/majgis/change-log/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/majgis/change-log/compare/v1.7.2...v2.0.0
 [v1.7.2]: https://github.com/majgis/change-log/compare/v1.7.1...v1.7.2
 [v1.7.1]: https://github.com/majgis/change-log/compare/v1.7.0...v1.7.1
