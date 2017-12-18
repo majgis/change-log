@@ -68,7 +68,7 @@ changeLog(args, options, (err, version) => {
       }
       child.spawnSync('git', commitArgs);
     }
-    const result = child.spawnSync('git', cmdArgs, {stdio: 'inherit'});
+    const result = child.spawnSync('git', cmdArgs);
     if (result.error) process.exit(1);
   }
 });
